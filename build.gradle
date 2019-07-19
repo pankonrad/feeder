@@ -7,7 +7,7 @@ plugins {
 
 
 
-version "0.1"
+version "0.2"
 group "org.pankonrad"
 
 repositories {
@@ -27,7 +27,8 @@ configurations {
 }
 
 dependencies {
-	compile group: 'com.pi4j', name: 'pi4j-core', version: '1.2'
+	compile "io.micronaut:micronaut-management"
+	compile "com.pi4j:pi4j-core:1.2"
     compile "io.micronaut:micronaut-http-client"
     compile "io.micronaut:micronaut-http-server-netty"
     compile "io.micronaut:micronaut-runtime-groovy"
