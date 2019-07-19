@@ -1,5 +1,0 @@
-profile: service
-defaultPackage: org.pankonrad
----
-testFramework: spock
-sourceLanguage: groovy
