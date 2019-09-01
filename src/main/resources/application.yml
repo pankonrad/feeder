@@ -5,6 +5,12 @@ micronaut:
   server:
     port: 8888
     
+  router:
+    static-resources:
+      default:
+        mapping: "/**"
+        paths: ["classpath:static"]
+    
 endpoints:
   all:
     enabled: true
