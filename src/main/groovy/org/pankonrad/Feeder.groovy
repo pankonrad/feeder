@@ -43,6 +43,12 @@ class Feeder {
 		return switchBoxClient.filter(state)
 	}
 	
+	@Get("/switchBoxState}")
+    @Produces(MediaType.TEXT_PLAIN)
+	String switchBoxState() {
+		return switchBoxClient.state()
+	}
+	
 /*
 	@Get("/pwm/{state}/{rate}/{range}")
     @Produces(MediaType.TEXT_PLAIN)

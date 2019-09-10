@@ -9,7 +9,10 @@ micronaut:
     static-resources:
       default:
         mapping: "/**"
-        paths: ["classpath:static"]
+        paths: ["file:///home/pi/feeder-gui/static"]
+      camera:
+        mapping: "/camera/**"
+        paths: ["file:///home/pi/camera/"]
     
 endpoints:
   all:
