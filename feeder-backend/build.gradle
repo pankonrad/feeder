@@ -39,6 +39,8 @@ dependencies {
     testCompile "io.micronaut:micronaut-inject-groovy"
     testCompile "io.micronaut.test:micronaut-test-spock"
     testRuntime "org.junit.jupiter:junit-jupiter-engine"
+	
+	implementation(project(':feeder-gui'))
 }
 
 test.classpath += configurations.developmentOnly
