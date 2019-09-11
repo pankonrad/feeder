@@ -3,13 +3,13 @@ micronaut:
     name: aquarium-feeder
     
   server:
-    port: 8888
+    port: 80
     
   router:
     static-resources:
       default:
         mapping: "/**"
-        paths: ["file:///home/pi/feeder-gui/static"]
+        paths: ["classpath:static"]
       camera:
         mapping: "/camera/**"
         paths: ["file:///home/pi/camera/"]
