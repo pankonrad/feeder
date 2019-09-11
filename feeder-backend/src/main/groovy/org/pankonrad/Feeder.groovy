@@ -25,8 +25,6 @@ class Feeder {
     String run(int state, int milliseconds) {
 		milliseconds = (milliseconds > 1000) ? 1000 : milliseconds;
 		
-//		changeFilterState(0)
-		
 		gpio.run(state, milliseconds)
 		String retVal = "FEEDER OK, state = " + state + ", milliseconds = " + milliseconds;
     }
@@ -44,17 +42,8 @@ class Feeder {
 	}
 	
 	@Get("/switchBoxState}")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
 	String switchBoxState() {
 		return switchBoxClient.state()
 	}
-	
-/*
-	@Get("/pwm/{state}/{rate}/{range}")
-    @Produces(MediaType.TEXT_PLAIN)
-    String run(int state, int rate, int range) {
-		gpio.runPwm(state, rate, range)
-		return "PWM PIN OK"
-    }
-*/
 }

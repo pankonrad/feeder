@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FeederAccessService } from './feeder-access.service';
 import { Input } from '@angular/core';
-
+import {RelaysState } from './RelaysState';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,7 +18,12 @@ export class AppComponent implements OnInit {
   feederEnabled = false;
   
   ngOnInit() {
-	  this.service.state().subscribe(x=> console.log(x));
+	  this.service.state().subscribe(
+      relaysData => {
+        this.lightEnabled = relaysData[0].state
+        this.filterEnabled = relaysData[1].state
+      }
+    );
   }
   
   public feeder(): void {

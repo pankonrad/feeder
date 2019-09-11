@@ -1,15 +1,13 @@
 package org.pankonrad
 
-import com.pi4j.io.gpio.GpioPinPwmOutput
+import javax.annotation.PostConstruct
+import javax.inject.Singleton
+
 import com.pi4j.io.gpio.GpioController
 import com.pi4j.io.gpio.GpioFactory
 import com.pi4j.io.gpio.GpioPinDigitalOutput
 import com.pi4j.io.gpio.PinState
 import com.pi4j.io.gpio.RaspiPin
-import com.pi4j.io.gpio.Pin
-import com.pi4j.util.CommandArgumentParser
-import javax.inject.Singleton
-import javax.annotation.PostConstruct
 
 @Singleton
 public class Gpio {
@@ -22,8 +20,7 @@ public class Gpio {
 // see: http://wiringpi.com/reference/raspberry-pi-specifics/
 
   private static GpioController gpio = null
-  private static GpioPinDigitalOutput red = null, yellow = null, green = null
-  private static GpioPinPwmOutput pwmPin = null
+  private static GpioPinDigitalOutput pin_25 = null, pin_27 = null, pin_28 = null, pin_29 = null
 
   @PostConstruct
   public void initialize() {
@@ -33,9 +30,10 @@ public class Gpio {
 		  @Override
 		  public void run() {
 			if (gpio != null) {
-			  red.low();
-			  yellow.low();
-			  green.low();
+			  pin_25.low();
+			  pin_27.low();
+			  pin_28.low();
+			  pin_29.low();
 			  gpio.shutdown();
 			}
 		  }
@@ -43,12 +41,10 @@ public class Gpio {
 
 		gpio = GpioFactory.getInstance()
 
-		red = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_27, "red", PinState.LOW)
-		yellow = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "yellow", PinState.LOW)
-		green = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "green", PinState.LOW)
-		
-		Pin pin = CommandArgumentParser.getPin(RaspiPin.class, RaspiPin.GPIO_01, new String[0])
-        pwmPin = gpio.provisionPwmOutputPin(pin)
+		pin_25 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_25, "pin_25", PinState.LOW)
+		pin_27 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_27, "pin_27", PinState.LOW)
+		pin_28 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "pin_28", PinState.LOW)
+		pin_29 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "pin_29", PinState.LOW)
 		
 	} catch(InterruptedException e) {
 		println e;
@@ -60,46 +56,25 @@ public class Gpio {
 
 	switch (state) {
 		case 0:
-			red.low()
-			yellow.low()
-			green.low()
+			pin_27.low()
+			pin_28.low()
+			pin_29.low()
 			
 			return
 		case 1:
-			red.high()
-			yellow.low()
-			green.high()
+			pin_27.high()
+			pin_28.low()
+			pin_29.high()
 			
 			Thread.sleep(milliseconds == 0 ? 1000 : milliseconds)
 
-			red.low()
-			yellow.low()
-			green.low()
+			pin_27.low()
+			pin_28.low()
+			pin_29.low()
 			
 			return
 	}
 	  
-	} catch(Exception e) {
-		println e;
-	}
-  }
-  
-  public void runPwm(final int state, int rate, int range) {
-	try {	
-
-		switch (state) {
-			case 0:
-				pwmPin.setPwm(0)		
-				return
-			case 1:
-				com.pi4j.wiringpi.Gpio.pwmSetMode(com.pi4j.wiringpi.Gpio.PWM_MODE_MS);
-				com.pi4j.wiringpi.Gpio.pwmSetRange(range == 0 ? 1000 : range);
-				com.pi4j.wiringpi.Gpio.pwmSetClock(rate == 0 ? 500 : rate);
-				
-				pwmPin.setPwm(rate)
-				return
-		}
-	
 	} catch(Exception e) {
 		println e;
 	}
