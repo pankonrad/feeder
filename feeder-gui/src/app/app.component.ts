@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   
   constructor(private service: FeederAccessService){}
   
-  lightEnabled = false;
+  lightEnabled = true;
   filterEnabled = true;
   feederEnabled = false;
   

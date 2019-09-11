@@ -41,7 +41,7 @@ class Feeder {
 		return switchBoxClient.filter(state)
 	}
 	
-	@Get("/switchBoxState}")
+	@Get("/switchBoxState")
     @Produces(MediaType.APPLICATION_JSON)
 	String switchBoxState() {
 		return switchBoxClient.state()
