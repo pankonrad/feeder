@@ -22,6 +22,9 @@ configurations {
 }
 
 dependencies {
+	implementation(project(':feeder-gui'))
+
+	compile "org.codehaus.groovy:groovy-json"
 	compile "io.micronaut:micronaut-management"
 	compile "com.pi4j:pi4j-core:1.2"
     compile "io.micronaut:micronaut-http-client"
@@ -39,8 +42,6 @@ dependencies {
     testCompile "io.micronaut:micronaut-inject-groovy"
     testCompile "io.micronaut.test:micronaut-test-spock"
     testRuntime "org.junit.jupiter:junit-jupiter-engine"
-	
-	implementation(project(':feeder-gui'))
 }
 
 test.classpath += configurations.developmentOnly

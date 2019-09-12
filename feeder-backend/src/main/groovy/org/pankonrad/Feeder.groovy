@@ -8,7 +8,7 @@ import io.micronaut.http.MediaType
 import javax.inject.Inject
 import groovy.json.JsonSlurper
 
-@CompileStatic
+// @CompileStatic
 @Controller("/") 
 class Feeder {
 
