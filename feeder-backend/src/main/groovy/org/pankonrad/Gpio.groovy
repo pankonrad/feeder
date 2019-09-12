@@ -23,9 +23,9 @@ public class Gpio {
 		  @Override
 		  public void run() {
 			if (gpio != null) {
-			  pin_25.low();
-//			  pin_28.low();
-//			  pin_29.low();
+			  pin_25.high();
+			  pin_28.high();
+			  pin_29.high();
 			  gpio.shutdown();
 			}
 		  }
@@ -33,9 +33,9 @@ public class Gpio {
 
 		gpio = GpioFactory.getInstance()
 
-		pin_25 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_25, "pin_25", PinState.LOW)
-//		pin_28 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "pin_28", PinState.LOW)
-//		pin_29 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "pin_29", PinState.LOW)
+		pin_25 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_25, "pin_25", PinState.HIGH)
+		pin_28 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "pin_28", PinState.HIGH)
+		pin_29 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "pin_29", PinState.HIGH)
 		
 	} catch(InterruptedException e) {
 		println e;
@@ -47,12 +47,12 @@ public class Gpio {
 
 	switch (state) {
 		case 0:
-			pin_25.low()			
+			pin_25.high()			
 			return
 		case 1:
-			pin_25.high()
-			Thread.sleep(milliseconds == 0 ? 1000 : milliseconds)
 			pin_25.low()
+			Thread.sleep(milliseconds == 0 ? 1000 : milliseconds)
+			pin_25.high()
 			return
 	}
 	  
