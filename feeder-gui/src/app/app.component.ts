@@ -10,29 +10,43 @@ import {SwitchBoxResponse } from './RelaysState';
 })
 export class AppComponent implements OnInit {
 	
+	states: SwitchBoxResponse;
   
-  constructor(private service: FeederAccessService){}
+	constructor(private service: FeederAccessService){};
   
-  lightEnabled = true;
-  filterEnabled = true;
-  feederEnabled = false;
+	ngOnInit() {
+		this.getStates();
+	};
   
-  ngOnInit() {
-	this.service.state().subscribe(
-      relaysData => {
-        this.lightEnabled = relaysData.lightState
-        this.filterEnabled = relaysData.filterState
-      }
-    );
+	getStates(){
+		this.service.state().subscribe( relaysData => {
+	        this.states = relaysData
+	      }
+	    );
+	};
+  
+  
+  public feeder(): void {
+	  this.service.feeder().subscribe(x=> console.log(x));
   }
   
+  public lightToggle(): void {
+
+  }
+  
+  public filterToggle(): void {
+
+  }
+  
+/*
+
   public feeder(): void {
 	  this.feederEnabled = true;
 	  this.service.feeder().subscribe(x=> console.log(x));
 	  this.feederEnabled = false;
   }
   
-  public lightState(): void {
+  public lightToggle(): void {
 	if(!this.lightEnabled) {
 		  this.service.enableLight().subscribe(x=> console.log(x));
 		  this.lightEnabled = true;
@@ -49,7 +63,7 @@ export class AppComponent implements OnInit {
     );
   }
   
-  public filterState(): void {
+  public filterToggle(): void {
 	if(!this.filterEnabled) {
 		  this.service.enableFilter().subscribe(x=> console.log(x));
 		  this.filterEnabled = true;
@@ -65,4 +79,6 @@ export class AppComponent implements OnInit {
       }
     );
   }
+
+*/
 }
