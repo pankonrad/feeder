@@ -10,7 +10,8 @@ import {SwitchBoxResponse } from './RelaysState';
 })
 export class AppComponent implements OnInit {
 	
-	states: SwitchBoxResponse;
+	lightState: boolean;
+	filterState: boolean;
   
 	constructor(private service: FeederAccessService){};
   
@@ -20,7 +21,8 @@ export class AppComponent implements OnInit {
   
 	getStates(){
 		this.service.state().subscribe( relaysData => {
-	        this.states = relaysData
+	        this.lightState = relaysData.lightState;
+			this.filterState = relaysData.filterState;
 	      }
 	    );
 	};
@@ -31,54 +33,18 @@ export class AppComponent implements OnInit {
   }
   
   public lightToggle(): void {
-
+		this.service.lightToggle().subscribe( relaysData => {
+	        this.lightState = relaysData.lightState;
+			this.filterState = relaysData.filterState;
+	      }
+	    );
   }
   
   public filterToggle(): void {
-
+		this.service.filterToggle().subscribe( relaysData => {
+	        this.lightState = relaysData.lightState;
+			this.filterState = relaysData.filterState;
+	      }
+	    );
   }
-  
-/*
-
-  public feeder(): void {
-	  this.feederEnabled = true;
-	  this.service.feeder().subscribe(x=> console.log(x));
-	  this.feederEnabled = false;
-  }
-  
-  public lightToggle(): void {
-	if(!this.lightEnabled) {
-		  this.service.enableLight().subscribe(x=> console.log(x));
-		  this.lightEnabled = true;
-	} else {
-		  this.service.disableLight().subscribe(x=> console.log(x));
-		  this.lightEnabled = false;
-	}
-	
-	this.service.state().subscribe(
-      relaysData => {
-        this.lightEnabled = relaysData.lightState
-        this.filterEnabled = relaysData.filterState
-      }
-    );
-  }
-  
-  public filterToggle(): void {
-	if(!this.filterEnabled) {
-		  this.service.enableFilter().subscribe(x=> console.log(x));
-		  this.filterEnabled = true;
-	} else {
-		  this.service.disableFilter().subscribe(x=> console.log(x));
-		  this.filterEnabled = false;
-	}
-	
-	this.service.state().subscribe(
-      relaysData => {
-        this.lightEnabled = relaysData.lightState
-        this.filterEnabled = relaysData.filterState
-      }
-    );
-  }
-
-*/
 }

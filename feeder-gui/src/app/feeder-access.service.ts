@@ -10,33 +10,37 @@ export class FeederAccessService {
 
   constructor(private client: HttpClient) { }
   
-  enableLight(): Observable<string> {
-    return this.client.get<string>("http://192.168.0.254/light/1");
-  }
-  
-  disableLight(): Observable<string> {
-    return this.client.get<string>("http://192.168.0.254/light/0");
-  }
-  
-  enableFilter(): Observable<string> {
-    return this.client.get<string>("http://192.168.0.254/filter/1");
-  }
-  
-  disableFilter(): Observable<string> {
-    return this.client.get<string>("http://192.168.0.254/filter/0");
-  }
-  
-  feeder(): Observable<string> {
-    return this.client.get<string>("http://192.168.0.254/feeder/1/250");
-  }
-  
-  state(): Observable<SwitchBoxResponse> {
-    return this.client.get<SwitchBoxResponse>("http://192.168.0.254/switchBoxState").pipe(
+  lightToggle(): Observable<SwitchBoxResponse> {
+    return this.client.get<SwitchBoxResponse>("http://192.168.0.154/light/2").pipe(
         map(
         relaysData => {
           return relaysData;
         }
       )
     );
+  }
+  
+  filterToggle(): Observable<SwitchBoxResponse> {
+    return this.client.get<SwitchBoxResponse>("http://192.168.0.154/filter/2").pipe(
+        map(
+        relaysData => {
+          return relaysData;
+        }
+      )
+    );
+  }
+  
+  state(): Observable<SwitchBoxResponse> {
+    return this.client.get<SwitchBoxResponse>("http://192.168.0.154/switchBoxState").pipe(
+        map(
+        relaysData => {
+          return relaysData;
+        }
+      )
+    );
+  }
+  
+  feeder(): Observable<string> {
+    return this.client.get<string>("http://192.168.0.154/feeder/1/250");
   }
 }
