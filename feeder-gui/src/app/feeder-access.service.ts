@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {RelaysState } from './RelaysState';
+import {SwitchBoxResponse } from './RelaysState';
 @Injectable({
   providedIn: 'root'
 })
@@ -30,8 +30,8 @@ export class FeederAccessService {
     return this.client.get<string>("http://192.168.0.254/feeder/1/250");
   }
   
-  state(): Observable<RelaysState> {
-    return this.client.get<RelaysState>("http://192.168.0.254/switchBoxState").pipe(
+  state(): Observable<SwitchBoxResponse> {
+    return this.client.get<SwitchBoxResponse>("http://192.168.0.254/switchBoxState").pipe(
         map(
         relaysData => {
           return relaysData;

@@ -6,6 +6,7 @@ import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Produces
 import io.micronaut.http.MediaType
 import javax.inject.Inject
+import groovy.json.JsonSlurper
 
 @CompileStatic
 @Controller("/") 
@@ -30,20 +31,34 @@ class Feeder {
     }
 	
 	@Get("/light/{state}")
-    @Produces(MediaType.TEXT_PLAIN)
-	String changeLightState(int state) {
-		return switchBoxClient.light(state)
+    @Produces(MediaType.APPLICATION_JSON)
+	SwitchBoxResponse changeLightState(int state) {
+		String response = switchBoxClient.light(state)
+		return prepareResponse(response)
 	}
 	
 	@Get("/filter/{state}")
-    @Produces(MediaType.TEXT_PLAIN)
-	String changeFilterState(int state) {
-		return switchBoxClient.filter(state)
+    @Produces(MediaType.APPLICATION_JSON)
+	SwitchBoxResponse changeFilterState(int state) {
+		String response = switchBoxClient.filter(state)
+		return prepareResponse(response)
 	}
 	
 	@Get("/switchBoxState")
     @Produces(MediaType.APPLICATION_JSON)
-	String switchBoxState() {
-		return switchBoxClient.state()
+	SwitchBoxResponse switchBoxState() {
+	  String response = switchBoxClient.state()
+	  return prepareResponse(response)
+	}
+	
+	private SwitchBoxResponse prepareResponse(String response) {
+      def jsonSlurper = new JsonSlurper()
+      def object = jsonSlurper.parseText(response)
+	  SwitchBoxResponse switchBoxResponse = new SwitchBoxResponse()
+	  switchBoxResponse.lightState = object.relays[0].state == 1 ? true : false
+	  switchBoxResponse.filterState = object.relays[1].state == 1 ? true : false
+	  println(switchBoxResponse.lightState)
+      println(switchBoxResponse.filterState)
+	  return switchBoxResponse
 	}
 }
