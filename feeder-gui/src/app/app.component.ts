@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
 	
 	lightState: boolean;
 	filterState: boolean;
+	feederState: boolean;
   
 	constructor(private service: FeederAccessService){};
   
@@ -29,7 +30,9 @@ export class AppComponent implements OnInit {
   
   
   public feeder(): void {
+	  this.feederState = true;
 	  this.service.feeder().subscribe(x=> console.log(x));
+	  this.feederState = false;
   }
   
   public lightToggle(): void {
