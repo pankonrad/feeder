@@ -1,0 +1,9 @@
+sudo crontab -e
+# */10 * * * * /root/checkFeeder.sh
+
+# #!/bin/bash
+# echo "STARTING FEEDER" ;
+# systemctl stop feeder && systemctl start feeder
+
+# @reboot systemctl stop feeder && systemctl start feeder
+# */10 * * * * systemctl stop feeder && systemctl start feeder
