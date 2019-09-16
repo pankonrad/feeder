@@ -8,6 +8,7 @@ import com.pi4j.io.gpio.GpioFactory
 import com.pi4j.io.gpio.GpioPinDigitalOutput
 import com.pi4j.io.gpio.PinState
 import com.pi4j.io.gpio.RaspiPin
+import java.util.HashMap
 
 @Singleton
 public class Gpio {
@@ -23,19 +24,25 @@ public class Gpio {
 		  @Override
 		  public void run() {
 			if (gpio != null) {
+			
 			  pin_25.high();
 			  pin_28.high();
 			  pin_29.high();
+		
 			  gpio.shutdown();
 			}
 		  }
 		});
 
 		gpio = GpioFactory.getInstance()
-
+		
 		pin_25 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_25, "pin_25", PinState.HIGH)
 		pin_28 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "pin_28", PinState.HIGH)
 		pin_29 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "pin_29", PinState.HIGH)
+		
+		pin_25.high();
+		pin_28.high();
+		pin_29.high();
 		
 	} catch(InterruptedException e) {
 		println e;
@@ -56,6 +63,28 @@ public class Gpio {
 			return
 	}
 	  
+	} catch(Exception e) {
+		println e;
+	}
+  }
+  
+  public void pump(final int pin28State, final int pin29State) {
+	try {
+		
+		if(pin28State == 0) {
+			pin_28.high()
+		} else {
+			pin_28.low()
+		}
+
+		if(pin29State == 0) {
+			pin_29.high()
+		} else {
+			pin_29.low()
+		}
+		
+		return
+	
 	} catch(Exception e) {
 		println e;
 	}

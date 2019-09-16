@@ -29,6 +29,29 @@ class Feeder {
 		gpio.run(state, milliseconds)
 		String retVal = "FEEDER OK, state = " + state + ", milliseconds = " + milliseconds;
     }
+
+    @Get("/pumpNormal")
+    @Produces(MediaType.TEXT_PLAIN)
+    String pumpNormal() {		
+		gpio.pump(0, 0)
+		String retVal = "pumpNormal OK, state28 = " + 0 + ", state29 = " + 0;
+    }
+	
+    @Get("/pumpOut")
+    @Produces(MediaType.TEXT_PLAIN)
+    String pumpOut() {		
+		gpio.pump(1, 1)
+		String retVal = "pumpOut OK, state28 = " + 1 + ", state29 = " + 1;
+    }
+	
+	/*
+    @Get("/pumpIn")
+    @Produces(MediaType.TEXT_PLAIN)
+    String pumpIn() {		
+		gpio.pump(1, 0)
+		String retVal = "pumpIn not implemented";
+    }
+	*/
 	
 	@Get("/light/{state}")
     @Produces(MediaType.APPLICATION_JSON)
