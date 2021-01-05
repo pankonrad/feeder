@@ -8,3 +8,5 @@ allprojects {
 subprojects {
 	version = '0.3'
 }
+
+// build.dependsOn 'feeder-backend:assemble'

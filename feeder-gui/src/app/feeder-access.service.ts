@@ -9,9 +9,9 @@ import {SwitchBoxResponse } from './RelaysState';
 export class FeederAccessService {
 
   constructor(private client: HttpClient) { }
-  
+
   lightToggle(): Observable<SwitchBoxResponse> {
-    return this.client.get<SwitchBoxResponse>("http://192.168.0.154/light/2").pipe(
+    return this.client.get<SwitchBoxResponse>("http://10.0.0.254/light/2").pipe(
         map(
         relaysData => {
           return relaysData;
@@ -19,9 +19,9 @@ export class FeederAccessService {
       )
     );
   }
-  
+
   filterToggle(): Observable<SwitchBoxResponse> {
-    return this.client.get<SwitchBoxResponse>("http://192.168.0.154/filter/2").pipe(
+    return this.client.get<SwitchBoxResponse>("http://10.0.0.254/filter/2").pipe(
         map(
         relaysData => {
           return relaysData;
@@ -29,9 +29,9 @@ export class FeederAccessService {
       )
     );
   }
-  
+
   state(): Observable<SwitchBoxResponse> {
-    return this.client.get<SwitchBoxResponse>("http://192.168.0.154/switchBoxState").pipe(
+    return this.client.get<SwitchBoxResponse>("http://10.0.0.254/switchBoxState").pipe(
         map(
         relaysData => {
           return relaysData;
@@ -39,8 +39,8 @@ export class FeederAccessService {
       )
     );
   }
-  
+
   feeder(): Observable<string> {
-    return this.client.get<string>("http://192.168.0.154/feeder/1/250");
+    return this.client.get<string>("http://10.0.0.254/feeder/1/250");
   }
 }
