@@ -124,7 +124,7 @@
     transition: all 0.2s ease-in-out;
     line-height: 24px;
   }
-  
+
   .card-container .card:not(:last-child) {
     margin-right: 0;
   }
@@ -319,27 +319,42 @@
 </style>
 <div class="content" role="main">
 
-  <div class="card-container" >	  
+  <div class="card-container" >
     <a [ngClass]="{ 'card-green':lightState, 'card-red':!lightState }" target="_blank" rel="noopener" (click)="lightToggle()" >
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
 
-      <span>LIGHT</span>
+      <span>LIGHT 1</span>
 
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>	  
-	  
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
+
     <a [ngClass]="{ 'card-green':filterState, 'card-red':!filterState }"  target="_blank" rel="noopener" (click)="filterToggle()">
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
 
-      <span>FILTER</span>
+      <span>LIGHT 2</span>
 
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
-	  
-    <a [ngClass]="{ 'card-green':feederState, 'card-red':!feederState }" target="_blank" rel="noopener" (click)="feeder()">
+
+    <a [ngClass]="{ 'card-green':feeder1State, 'card-red':!feeder1State }" target="_blank" rel="noopener" (click)="feeder1()">
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
 
-      <span>FEEDER (250ms)</span>
+      <span>FEEDER 1</span>
 
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
+
+    <a [ngClass]="{ 'card-green':feeder2State, 'card-red':!feeder2State }" target="_blank" rel="noopener" (click)="feeder2()">
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+
+      <span>FEEDER 2</span>
+
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
+
+    <a [ngClass]="{ 'card-green':feeder3State, 'card-red':!feeder3State }" target="_blank" rel="noopener" (click)="feeder3()">
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+
+      <span>FEEDER 3</span>
+
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
+
   </div>
 
 </div>

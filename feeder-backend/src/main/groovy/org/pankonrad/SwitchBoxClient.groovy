@@ -5,7 +5,7 @@ import io.micronaut.http.annotation.Get
 import io.micronaut.http.client.annotation.Client
 
 @CompileStatic
-@Client("http://192.168.0.51")
+@Client("http://10.0.0.253")
 interface SwitchBoxClient {
     @Get('/s/0/{state}') 
     String light(int state)

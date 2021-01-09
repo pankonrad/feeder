@@ -1,12 +1,12 @@
 package org.pankonrad
 
-import groovy.transform.CompileStatic
+import groovy.json.JsonSlurper
+import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Produces
-import io.micronaut.http.MediaType
+
 import javax.inject.Inject
-import groovy.json.JsonSlurper
 
 // @CompileStatic
 @Controller("/") 
@@ -20,13 +20,27 @@ class Feeder {
       this.gpio = gpio
 	  this.switchBoxClient = switchBoxClient
     }
+
+	@Get("/feeder/{pin}/{state}/{milliseconds}")
+	@Produces(MediaType.TEXT_PLAIN)
+	boolean run(int pin, int state, int milliseconds) {
+		int resultPinState = gpio.run(pin, state, milliseconds)
+		String retVal = "FEEDER OK. PIN: " + pin  + "; resultPinState: " + resultPinState;
+		return (resultPinState > 0);
+	}
+
+	@Get("/feeder")
+	@Produces(MediaType.APPLICATION_JSON)
+	FeederResponse states() {
+		return gpio.states();
+	}
 	
     @Get("/feeder/{state}/{milliseconds}")
     @Produces(MediaType.TEXT_PLAIN)
     String run(int state, int milliseconds) {
 		milliseconds = (milliseconds > 1000) ? 1000 : milliseconds;
 		
-		gpio.run(state, milliseconds)
+		gpio.run(25, state, milliseconds)
 		String retVal = "FEEDER OK, state = " + state + ", milliseconds = " + milliseconds;
     }
 
@@ -83,5 +97,19 @@ class Feeder {
 	  println(switchBoxResponse.lightState)
       println(switchBoxResponse.filterState)
 	  return switchBoxResponse
+	}
+
+	private FeederResponse feederResponse(String response) {
+		def jsonSlurper = new JsonSlurper()
+		def object = jsonSlurper.parseText(response)
+		FeederResponse feederResponse = new FeederResponse()
+		feederResponse.feeder1State = object.relays[0].state == 1 ? true : false
+		feederResponse.feeder2State = object.relays[0].state == 1 ? true : false
+		feederResponse.feeder3State = object.relays[0].state == 1 ? true : false
+
+		println(feederResponse.feeder1State)
+		println(feederResponse.feeder2State)
+		println(feederResponse.feeder3State)
+		return feederResponse
 	}
 }
